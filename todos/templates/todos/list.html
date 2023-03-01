@@ -17,8 +17,8 @@
                     <tbody>
                         {%for list in todolist_object%}
                         <tr>
-                            <td>{{list.name}}</td>
-                            <td>{{list.items.task}}</td>
+                            <td><a href="{% url 'todo_list_detail' list.id %}"> {{list.name}}</td>
+                            <td>{{list.items.all|length}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
