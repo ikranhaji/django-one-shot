@@ -18,15 +18,31 @@ def todo_list_detail(request, id):
     }
     return render(request, "todos/detail.html", context)
 
+
 def todo_list_create(request):
     if request.method == "POST":
-        form= TodoListForm(request.POST)
+        form = TodoListForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("todo_list_detail")
     else:
-        form=TodoListForm
-    context= {
-        "form":form,
+        form = TodoListForm
+    context = {
+        "form": form,
     }
-    return render(request,'todos/create.html', context)
+    return render(request, 'todos/create.html', context)
+
+
+def todo_list_update(request, id):
+    list = get_object_or_404(TodoList, id=id)
+    if request.method == "POST":
+        form = TodoListForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+            return redirect("todo_list_detail", id=id)
+    else:
+        form = TodoListForm(instance=list)
+        context = {
+            "form": form,
+        }
+        return render(request, "todos/edit.html", context)
