@@ -8,6 +8,7 @@
             <div>
                 <h1>{{todo_list_detail.name}}</h1>
                 <a href="{% url 'todo_list_update' todo_list_detail.id%}">Edit</a>
+                <a href="{% url 'todo_list_delete' todo_list_detail.id %}">Delete</a>
                 <h2>Tasks</h2>
                 <table>
                     <thread>

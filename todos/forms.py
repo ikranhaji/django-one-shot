@@ -8,3 +8,4 @@ class TodoListForm(ModelForm):
         fields = (
             "name",
         )
+
