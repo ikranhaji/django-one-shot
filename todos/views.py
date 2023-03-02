@@ -42,10 +42,10 @@ def todo_list_update(request, id):
             return redirect("todo_list_detail", id=id)
     else:
         form = TodoListForm(instance=list)
-        context = {
-            "form": form,
+    context = {
+        "form": form,
         }
-        return render(request, "todos/edit.html", context)
+    return render(request, "todos/edit.html", context)
 
 
 def todo_list_delete(request, id):
@@ -55,10 +55,10 @@ def todo_list_delete(request, id):
         return redirect("todo_list_list")
     else:
         form = TodoListForm
-        context = {
-            "form": form,
+    context = {
+        "form": form,
         }
-        return render(request, "todos/delete.html", context)
+    return render(request, "todos/delete.html", context)
 
 
 def todo_item_create(request):
@@ -73,3 +73,17 @@ def todo_item_create(request):
             "form": form
         }
     return render(request, "todos/item.html", context)
+
+
+def todo_item_update(request, id):
+    item =TodoItem.objects.get(id=id)
+    if request.method == "POST":
+        form = TodoItemForm(request.POST, instance=item)
+        item = form.save()
+        return redirect("todo_list_detail", id=item.list.id)
+    else:
+        form = TodoItemForm
+    context = {
+        "form": form,
+    }
+    return render(request, "todos/update.html", context)
